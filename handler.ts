@@ -1,4 +1,9 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import serverlessHttp from "serverless-http";
+
+import { app } from "./src/app";
+
+export const run = serverlessHttp(app);
 
 export const hello = async (
   event: APIGatewayProxyEvent
