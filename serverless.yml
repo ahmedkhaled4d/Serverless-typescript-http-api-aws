@@ -1,17 +1,25 @@
 service: typescript-http-api
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
   runtime: nodejs18.x
+  memorySize: 512
+  timeout: 10
+  logs:
+    httpApi: true
+  httpApi:
+    # metrics: true # Enable if you need
+    cors: true
 
 functions:
-  hello:
-    handler: handler.hello
+  app:
+    handler: src/handler.handler
+    # reservedConcurrency: 100
     events:
       - httpApi:
-          path: /
-          method: get
+          path: "/{proxy+}"
+          method: "*"
 
 plugins:
   - serverless-plugin-typescript
