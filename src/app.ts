@@ -9,7 +9,7 @@ app.use(helmet());
 
 app.get("/", (_, res) => {
   res.json({
-    msg: "Hello World",
+    msg: "Hello World From serverless",
   });
 });
 

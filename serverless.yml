@@ -6,6 +6,7 @@ provider:
   runtime: nodejs18.x
   memorySize: 512
   timeout: 10
+  logRetentionInDays: 90
   logs:
     httpApi: true
   httpApi:
@@ -21,5 +22,12 @@ functions:
           path: "/{proxy+}"
           method: "*"
 
+package:
+  patterns:
+    - "!**/*.test.ts"
+  individually: true
+
 plugins:
-  - serverless-plugin-typescript
+  - serverless-dotenv-plugin
+  - serverless-esbuild
+  - serverless-offline
